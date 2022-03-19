@@ -1,26 +1,25 @@
-import "reflect-metadata";
-import { ApolloServer } from "apollo-server-express";
-import helmet from "helmet";
-import { buildSchema } from "type-graphql";
-import cors from "cors";
+import 'reflect-metadata';
+import { ApolloServer } from 'apollo-server-express';
+import express from 'express';
+import helmet from 'helmet';
+import { buildSchema } from 'type-graphql';
+import cors from 'cors';
 
-import resolvers from "./resolvers";
-import { Context } from "./types";
+import resolvers from './resolvers';
+import { Context } from './types';
 
-const port = process.env.PORT || "8080";
-
-const express = require("express");
+const port = process.env.PORT || '8080';
 
 const main = async () => {
   const app = express();
 
   app.use(helmet());
-  app.set("trust proxy", 1);
+  app.set('trust proxy', 1);
   app.use(
     cors({
-      origin: "https://studio.apollographql.com",
+      origin: 'https://studio.apollographql.com',
       credentials: true,
-    })
+    }),
   );
 
   const apolloServer = new ApolloServer({
@@ -40,8 +39,8 @@ const main = async () => {
     cors: false,
   });
 
-  app.listen(parseInt(port), () => {
-    console.log("Server is started on port: " + port);
+  app.listen(Number(port), () => {
+    console.log('Server is started on port: ' + port);
   });
 };
 
